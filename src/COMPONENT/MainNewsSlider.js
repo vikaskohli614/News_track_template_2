@@ -45,7 +45,7 @@ function MainNewsSlider({ agencyDetails, breakingNews, page_name }) {
 
   const fetchAd = async () => {
     try {
-      const response = await axios.get(`http://174.138.101.222:8080/${id}/${page_name}/Topbar/get-Advertisement`)
+      const response = await axios.get(`http://174.138.101.222:8080/${id}/${page_name}/Below_Breaking_News/get-Advertisement`)
       // console.log(response.data.data[0])
       setAd(response.data.data[0])
     } catch (error) {
