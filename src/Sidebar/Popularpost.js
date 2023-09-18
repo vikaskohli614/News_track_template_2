@@ -4,7 +4,7 @@ import './Sidebar.css';
 import { useParams } from "react-router";
 import axios from "axios";
 import { Link } from "react-router-dom";
-function Popularpost({page_name,agencyDetails}) {
+function Popularpost({ page_name, agencyDetails }) {
   const { id } = useParams();
 
   const [breakingNews, setBreakingNews] = useState();
@@ -74,20 +74,20 @@ function Popularpost({page_name,agencyDetails}) {
                 </div>
                 <div className="part2" style={{ marginLeft: "10px" }}>
                   <p>{news.category} / {formatDate(news.updatedAt)}</p>
-                  <a style={{ fontSize: "15px" }} href="/">{news.title}</a>
+                  <Link  to={`/${id}/DetailedNews/${news._id}`} style={{ fontSize: "15px" }} href="/">{news.title}</Link>
                 </div>
               </div>
             );
           })}
       </div>
-      
-          <div>
-            <h4>advertisement</h4>
-          </div>
-          <div className="image">
-            <img src={`http://174.138.101.222:8080${ad?.image}`} alt="Ads" />
-          </div>
-        </div>
+
+      <div>
+        <h4>advertisement</h4>
+      </div>
+      <div className="image">
+        <img src={`http://174.138.101.222:8080${ad?.image}`} alt="Ads" />
+      </div>
+    </div>
   )
 }
 
