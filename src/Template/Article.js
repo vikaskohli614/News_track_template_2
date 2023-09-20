@@ -83,11 +83,40 @@ function Article({ agencyDetails }) {
     return formattedDate;
   }
 
+  // pagination start here 
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3; // Number of items to display per page
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const itemsToShow = data.slice(startIndex, endIndex);
+
+  const handleNextPage = () => {
+    if (endIndex < data.length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (startIndex > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+
   return (
     <div className='articles'>
       <h2 className='title'>More Articles</h2>
       {fetch &&
-        data.map((item, index) => {
+        itemsToShow.map((item, index) => {
           return (
             <div key={index} className="post">
               <div className="details">
@@ -119,16 +148,16 @@ function Article({ agencyDetails }) {
                         </div>
                         <h2 className='article-h2'>
                           <a onClick={() => {
-                              navigate(
-                                `/${agencyDetails._id}/DetailedNews/${news._id}`,
-                                {
-                                  state: {
-                                    item: news,
-                                    agencyDetails: agencyDetails,
-                                  },
-                                }
-                              );
-                            }}>{news.title}</a>
+                            navigate(
+                              `/${agencyDetails._id}/DetailedNews/${news._id}`,
+                              {
+                                state: {
+                                  item: news,
+                                  agencyDetails: agencyDetails,
+                                },
+                              }
+                            );
+                          }}>{news.title}</a>
                         </h2>
                         <p className='post-p'>{formatDate(news.updatedAt)}</p>
                       </div>
@@ -138,6 +167,42 @@ function Article({ agencyDetails }) {
             </div>
           );
         })}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        <nav aria-label="Page navigation example">
+          <ul className="pagination">
+            <li className="page-item">
+              <a className="page-link"
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}>
+                <i className="fa fa-angle-left text-primary mr-2" />
+                <i className="fa fa-angle-left text-primary mr-2" />
+              </a>
+            </li>
+            {pageNumbers.map((pageNumber) => (
+              <li className="page-item">
+                <a
+                  key={pageNumber}
+                  className={`page-link page-number-button ${pageNumber === currentPage ? 'active' : ''}`}
+                  onClick={() => handlePageClick(pageNumber)}
+                >
+                  {pageNumber}
+                </a>
+              </li>
+            ))}
+            <li className="page-item">
+              <a className="page-link"
+                onClick={handleNextPage}
+                disabled={endIndex >= data.length}>
+                <i className="fa fa-angle-right text-primary mr-2" />
+                <i className="fa fa-angle-right text-primary mr-2" />
+              </a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
   )
 }

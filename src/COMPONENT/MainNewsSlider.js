@@ -60,6 +60,38 @@ function MainNewsSlider({ agencyDetails, breakingNews, page_name }) {
     getCategories();
   }, []);
 
+  // Pagination for categories
+  const [currentCategoryPage, setCurrentCategoryPage] = useState(1);
+  const categoryItemsPerPage = 8; // Number of categories to display per page
+
+  const startIndex = (currentCategoryPage - 1) * categoryItemsPerPage;
+  const endIndex = startIndex + categoryItemsPerPage;
+  const categoriesToShow = categories.slice(startIndex, endIndex);
+
+  const handleNextCategoryPage = () => {
+    if (endIndex < categories.length) {
+      setCurrentCategoryPage(currentCategoryPage + 1);
+    }
+  };
+
+  const handlePrevCategoryPage = () => {
+    if (startIndex > 0) {
+      setCurrentCategoryPage(currentCategoryPage - 1);
+    }
+  };
+
+  const handleCategoryPageClick = (pageNumber) => {
+    setCurrentCategoryPage(pageNumber);
+  };
+
+  const categoryTotalPages = Math.ceil(categories.length / categoryItemsPerPage);
+  const categoryPageNumbers = Array.from(
+    { length: categoryTotalPages },
+    (_, i) => i + 1
+  );
+
+
+
   return (
     <div className="container">
       <div className="row " style={{ display: 'flex', flexDirection: 'row' }} >
@@ -153,13 +185,54 @@ function MainNewsSlider({ agencyDetails, breakingNews, page_name }) {
                     ))}
                   </div>
                 ))}
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <nav aria-label="Page navigation example">
+                    <ul className="pagination">
+                      <li className="page-item">
+                        <a
+                          className="page-link"
+                          onClick={handlePrevCategoryPage}
+                          disabled={currentCategoryPage === 1}
+                        >
+                          <i className="fa fa-angle-left text-primary mr-2" />
+                          <i className="fa fa-angle-left text-primary mr-2" />
+                        </a>
+                      </li>
+                      {categoryPageNumbers.map((pageNumber) => (
+                        <li className="page-item" key={pageNumber}>
+                          <a
+                            className={`page-link page-number-button ${pageNumber === currentCategoryPage ? 'active' : ''
+                              }`}
+                            onClick={() => handleCategoryPageClick(pageNumber)}
+                          >
+                            {pageNumber}
+                          </a>
+                        </li>
+                      ))}
+                      <li className="page-item">
+                        <a
+                          className="page-link"
+                          onClick={handleNextCategoryPage}
+                          disabled={endIndex >= categories.length}
+                        >
+                          <i className="fa fa-angle-right text-primary mr-2" />
+                          <i className="fa fa-angle-right text-primary mr-2" />
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* <Article page_name={'Home_Page'} agencyDetails={agencyDetails} breakingNews={breakingNews} /> */}
     </div>
 
   )
