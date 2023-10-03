@@ -30,6 +30,7 @@ function Article({ agencyDetails }) {
       );
 
       const responses = await Promise.all(promises);
+      console.log(responses)
 
       const newData = responses.map((response, index) => ({
         category: categories[index],

@@ -168,7 +168,7 @@ function MainNewsSlider({ agencyDetails, breakingNews, page_name }) {
             <div className="box">
               <h2 className="title">Categories</h2>
               <div className="sponsors">
-                {splitCategoriesIntoPairs(categories).map((pair, index) => (
+                {splitCategoriesIntoPairs(categoriesToShow).map((pair, index) => (
                   <div key={index} className="displayinline">
                     {pair.map((item, itemIndex) => (
                       <div key={itemIndex} className="categories-item"

@@ -30,7 +30,7 @@ function CategoryPage() {
     };
     useEffect(() => {
         getData();
-    }, []);
+    }, [agencyDetails]);
     return (
         <div className="centre">
                     <div className="col-lg-12 py-3">

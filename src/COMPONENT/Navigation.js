@@ -60,6 +60,7 @@ function Navigation() {
         </li>
 
         <li className='Categories-li'><Link className='Categories-a ' to={`/${agencyDetails._id}`}> Contact</Link></li>
+        <li className='Categories-li'><Link className='Categories-a ' to={`/${agencyDetails._id}/Epaper`}> Epaper</Link></li>
       </ul>
     </div>
   )

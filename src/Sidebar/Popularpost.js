@@ -107,7 +107,6 @@ function Popularpost({ page_name, agencyDetails }) {
                     {news.title.length > 60
                       ? `${news.title.substring(0, 60)}...`
                       : news.title}
-                    {/* {news.title} */}
                     </Link>
                 </div>
               </div>
