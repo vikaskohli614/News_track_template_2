@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+  }
+  @font-face {
+    font-family: bhaskar;
+    /* src: url("../Fonts/Bhaskar.ttf"); */
+  }
+  
+  .rightShift{
+    margin-right: 12px;
+    margin-bottom: 3px;
+  }
+  .home-container {
+    display: flex;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  
+    .pdf-container {
+      box-sizing: border-box;
+      /* // background-color: rgb(43, 145, 145); */
+      border: 1px solid black;
+      width: 100%;
+      min-width: 1000px;
+      height: 100%;
+      cursor: crosshair;
+    }
+  }
+  .marginLeft{
+    margin-left: 8px;
+  }
+  

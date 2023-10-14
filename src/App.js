@@ -11,7 +11,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/:id" element={<Template />} />
-         <Route path="/:id/DetailedNews/:newsId" element={<ViewNews />} />
+        <Route path="/:id/DetailedNews/:newsId" element={<ViewNews />} />
         <Route path="/:id/category/:category" element={<Category />} />
         <Route path="/:id/Epaper/" element={<Epaper />} />
         <Route path="/:id/Epaper/:EpaperId" element={<Epaper_details />} />
